@@ -9,6 +9,9 @@ Our model will be trained on Kaggle to enable GPU acceleration.
 ## Structure
 
 - `select_pictures.ipynb`: Selects subset of pictures (mammals from eastern Canada and northeastern US).
+    - `observations_roi_mammals.parquet`
+    - `photo_roi_mammals.parquet`
+
 - `download_pictures.ipynb`: Downloads subset of pictures from AWS S3 bucket.
 - `sort_pictures.ipynb`: Sorts pictures and store them into directories by species name (for later import as TensorFlow datasets).
 
