@@ -14,6 +14,7 @@ Our model will be trained on Kaggle to enable GPU acceleration.
 
 - `download_pictures.ipynb`: Downloads subset of pictures from AWS S3 bucket.
 - `sort_pictures.ipynb`: Sorts pictures and store them into directories by species name (for later import as TensorFlow datasets).
+- `train_models.ipynb`: contains the models training code (this notebook was run on Kaggle.com to benefit from GPU acceleration).
 
 ## Dependencies
 
