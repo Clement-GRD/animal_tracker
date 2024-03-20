@@ -1,6 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+##################################################################################################################################################################
+########################################################################## Predictions ##########################################################################
+##################################################################################################################################################################
+
+
 def predict(preprocessed_image: np.ndarray, model) -> tuple[str, float]:
     """
     Predicts the class and likelihood of an animal in the given preprocessed image.
@@ -56,3 +61,6 @@ def plot_image_prediction(preprocessed_image, model):
     ax.axes.yaxis.set_ticks([])
 
     fig.suptitle(predicted_class.replace('_', ' ').title() +f' ({prediction_likelihood}%)', y=0.92)
+
+if __name__ == '__main__':
+    pass
