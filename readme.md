@@ -1,6 +1,6 @@
 # Animal Tracker Project
 
-This project aims at building an application able of classifying animal observation pictures (*e.g.* pictures of animal, tracks, scats, etc.) for education purposes.
+This project aims at building an application to classify animal observation pictures (*e.g.* pictures of animal, tracks, scats, etc.) for education purposes.
 
 We will base our model on the AWS open dataset from [iNaturalist](https://github.com/inaturalist/inaturalist-open-data) containing tens of millions of wildlife observations.
 
