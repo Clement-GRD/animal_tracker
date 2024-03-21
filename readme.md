@@ -7,14 +7,20 @@ We will base our model on the AWS open dataset from [iNaturalist](https://github
 Our model will be trained on Kaggle to enable GPU acceleration.
 
 ## Structure
+- `data`: data used for modeling (too large to be hosted here)
+- `models`: models and model weights
+- `notebooks`
+    - `select_pictures.ipynb`: selects subset of pictures (mammals from eastern Canada and northeastern US).
+        - `observations_roi_mammals.parquet`
+        - `photo_roi_mammals.parquet`
+    - `download_pictures.ipynb`: downloads subset of pictures from AWS S3 bucket.
+    - `sort_pictures.ipynb`: sorts pictures and store them into directories by species name (for later import as TensorFlow datasets).
+    - `train_model.ipynb`: contains the models training code (this notebook was run on Kaggle.com to benefit from GPU acceleration).
+- `src`
+    - `tests`: unit tests.
+    - `utils`: various modules.
+    - `API.py`: Python script for a test FastAPI deployment.
 
-- `select_pictures.ipynb`: Selects subset of pictures (mammals from eastern Canada and northeastern US).
-    - `observations_roi_mammals.parquet`
-    - `photo_roi_mammals.parquet`
-
-- `download_pictures.ipynb`: Downloads subset of pictures from AWS S3 bucket.
-- `sort_pictures.ipynb`: Sorts pictures and store them into directories by species name (for later import as TensorFlow datasets).
-- `train_models.ipynb`: contains the models training code (this notebook was run on Kaggle.com to benefit from GPU acceleration).
 
 ## Dependencies
 
