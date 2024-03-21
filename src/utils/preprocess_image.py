@@ -27,6 +27,21 @@ def load_image(path: str) -> np.ndarray:
     
     except Exception as e:
         raise ValueError("Error loading image: {}".format(e))
+    
+def read_image_from_buffer(file: Any) -> np.ndarray:
+    """
+    Reads an image from a buffer and returns it as a NumPy array in RGB format.
+
+    Parameters:
+        file (Any): The file buffer containing the image data.
+
+    Returns:
+        np.ndarray: The image array in RGB format.
+    """
+    image = np.frombuffer(file, np.uint8)
+    image = cv.imdecode(image, cv.IMREAD_COLOR)
+    image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
+    return image    
 
 def crop_image_square(image: np.ndarray) -> np.ndarray:
     """
