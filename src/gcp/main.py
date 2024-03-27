@@ -82,5 +82,3 @@ def predict(request) -> dict[str, float]:
     confidence = round(np.max(prediction_array) * 100, 1)
 
     return {'predicted_class': predicted_class, 'confidence': confidence}
-    
-
