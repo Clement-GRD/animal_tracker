@@ -1,14 +1,24 @@
 # Animal Tracker Project
 
-This project aims at building an application to classify animal observation pictures (*e.g.* pictures of animal, tracks, scats, etc.) for education purposes.
+This project aims at building and deploying an application to classify animal observation pictures (*e.g.* pictures of animal, tracks, scats, etc.) for education purposes.
 
-We will base our model on the AWS open dataset from [iNaturalist](https://github.com/inaturalist/inaturalist-open-data) containing tens of millions of wildlife observations.
+The training data is a subset of the Amazon Web Services (AWS) open dataset from [iNaturalist](https://github.com/inaturalist/inaturalist-open-data) containing tens of millions of wildlife observations.
 
-Our model will be trained on Kaggle to enable GPU acceleration.
+Transfer learning was used to improve prediction performance. A pretrained EfficientNet model was fine tuned on cloud computing platform [Kaggle](http://kaggle.com) to enable GPU acceleration to make training faster.
+
+Model was uploaded on a Google Cloud Platform (GCP) Storage bucket.
+
+Application was deployed on GCP using the Cloud Functions API.
+
+## Usage
+
+For now, app can only be used by sending a HTTP post request containing a the image to be classified (named `file`) to this endpoint `https://us-central1-animal-tracker-418112.cloudfunctions.net/predict`. GCP Cloud Functions returns a dictionary containing the predicted class as well as the confidence value.
 
 ## Structure
 - `data`: data used for modeling (too large to be hosted here)
 - `models`: models and model weights
+    - `model`: best model, used in production.
+    - `weights`: weights of all the trained models.
 - `notebooks`
     - `select_pictures.ipynb`: selects subset of pictures (mammals from eastern Canada and northeastern US).
         - `observations_roi_mammals.parquet`
@@ -25,7 +35,7 @@ Our model will be trained on Kaggle to enable GPU acceleration.
 ## Dependencies
 
 ## Data
-Metadata files from AWS S3 bucket (around 40Gb total): 
+Metadata files from AWS S3 bucket, not stored here (around 40Gb total): 
 - `observations.csv`
 - `photos.csv`
 - `taxa.csv`
