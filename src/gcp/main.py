@@ -48,21 +48,30 @@ def predict(request: Request) -> Dict[str, float]:
     Returns:
         Dict[str, float]: A dictionary containing the predicted class and confidence level.
     """    
-    global model
-    if model == None:
-        download_blob(
-            'animal-tracker-tf-models',
-            'models/pretrained_fine_300_ratio.h5',
-            '/tmp/pretrained_fine_300_ratio.h5',
-        )
-        model = load_model('/tmp/pretrained_fine_300_ratio.h5')
+    try: 
+        # Download and load the model if it's not already loaded
+        global model
+        if model == None:
+            download_blob(
+                'animal-tracker-tf-models',
+                'models/pretrained_fine_300_ratio.h5',
+                '/tmp/pretrained_fine_300_ratio.h5',
+            )
+            model = load_model('/tmp/pretrained_fine_300_ratio.h5')
+        
+        # Get the uploaded image from the request and preprocess it
+        image = request.files['file']
+        cropped_image = ImageOps.fit(Image.open(image).convert('RGB'), (300, 300))
+        image_array = np.expand_dims(np.array(cropped_image), 0)
+
+        # Make predictions using the model
+        prediction_array = model.predict(image_array)
+        predicted_class = animal_classes[np.argmax(prediction_array)]
+        confidence = round(np.max(prediction_array) * 100, 1)
+
+        return {'predicted_class': predicted_class, 'confidence': confidence}
     
-    image = request.files['file']
-    cropped_image = ImageOps.fit(Image.open(image).convert('RGB'), (300, 300))
-    image_array = np.expand_dims(np.array(cropped_image), 0)
-
-    prediction_array = model.predict(image_array)
-    predicted_class = animal_classes[np.argmax(prediction_array)]
-    confidence = round(np.max(prediction_array) * 100, 1)
-
-    return {'predicted_class': predicted_class, 'confidence': confidence}
+    except Exception as e:
+    # If an error occurs, return an error message
+    error_message = f"An error occurred: {str(e)}"
+    return {'error': error_message}
