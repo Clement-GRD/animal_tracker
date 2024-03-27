@@ -15,7 +15,7 @@ Application was deployed on GCP using the Cloud Functions API.
 For now, app can only be used by sending a HTTP post request containing a the image to be classified (named `file`) to this endpoint `https://us-central1-animal-tracker-418112.cloudfunctions.net/predict`. GCP Cloud Functions returns a dictionary containing the predicted class as well as the confidence value.
 
 ## Structure
-- `data`: data used for modeling (too large to be hosted here)
+- `data`: data used for modeling (too large to be hosted here) and test images
 - `models`: models and model weights
     - `model`: best model, used in production.
     - `weights`: weights of all the trained models.
@@ -26,9 +26,11 @@ For now, app can only be used by sending a HTTP post request containing a the im
     - `download_pictures.ipynb`: downloads subset of pictures from AWS S3 bucket.
     - `sort_pictures.ipynb`: sorts pictures and store them into directories by species name (for later import as TensorFlow datasets).
     - `train_model.ipynb`: contains the models training code (this notebook was run on Kaggle.com to benefit from GPU acceleration).
+    - `predict_test.ipynb`: test prediction on a test image.
 - `src`
     - `tests`: unit tests.
     - `utils`: various modules.
+    - `gcp`: Google Cloud scripts
     - `API.py`: Python script for a test FastAPI deployment.
 
 

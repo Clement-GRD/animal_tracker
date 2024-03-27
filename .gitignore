@@ -1,4 +1,5 @@
 *.jpg
+!data/test_image_001.jpg
 *.parquet
 **/.DS_Store
 Store
