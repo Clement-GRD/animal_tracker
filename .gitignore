@@ -1,3 +1,4 @@
 *.jpg
 *.parquet
 **/.DS_Store
+Store
